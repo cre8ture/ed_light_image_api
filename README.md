@@ -50,7 +50,9 @@ Remember to replace `<your-image-url>` and `<path-to-your-image>` with the actua
 
 ### Installation
 
-1. **Please download this project from this Google Drive link** :
+1. **Please download this project from this Google Drive link**:
+https://drive.google.com/drive/folders/1TVqf1pBXPz-AW_QyEsGmCNCzpvXNJge8?usp=sharing
+
  Or Optionally: Via GitHub  
    ```bash
    git clone https://github.com/cre8ture/ed_light_image_api.git

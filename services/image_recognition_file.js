@@ -1,6 +1,9 @@
 const axios = require('axios');
 const dotenv = require('dotenv');
 
+// This file was created by Kai Kleinbard.
+
+
 dotenv.config();
 
 const apiKey = process.env.OPENAI_API_KEY;

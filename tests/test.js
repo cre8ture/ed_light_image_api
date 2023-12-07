@@ -1,4 +1,5 @@
-// test.js
+// This file was created by Kai Kleinbard.
+
 const { app, server } = require('../index');
 const request = require('supertest');
 const fs = require('fs');

@@ -1,6 +1,9 @@
 const OpenAI = require('openai');
 require('dotenv').config();
 
+// This file was created by Kai Kleinbard.
+
+
 const secretKey = process.env.OPENAI_API_KEY
 const openai = new OpenAI({ apiKey: secretKey });
 

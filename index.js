@@ -6,6 +6,9 @@ const bodyParser = require('body-parser');
 const { image_recognition_url } = require('./services/image_recognition_url');
 const { image_recognition_file } = require('./services/image_recognition_file');
 
+// This file was created by Kai Kleinbard.
+
+
 // load dotenv
 require('dotenv').config();
 const { loggerMiddleWare, authorize } = require('./middleware/middleware');
