@@ -1,34 +1,31 @@
-// const fs = require('fs');
 const axios = require('axios');
 const dotenv = require('dotenv');
-// const path = require('path');
 
 dotenv.config();
 
 const apiKey = process.env.OPENAI_API_KEY;
-
-// // Check the current working directory
-// console.log("Current working directory:", process.cwd());
-
-// // Function to encode the image
-// function encodeImage(imagePath) {
-//   const imageBuffer = fs.readFileSync(imagePath);
-//   return imageBuffer.toString('base64');
-// }
-
-// Construct the path to your image
-// Adjust the path based on your directory structure
-// const imagePath = path.join(process.cwd(), "/tests/images/test3.jpeg");
-
-// Getting the base64 string
-// const base64Image = encodeImage(imagePath);
 
 const headers = {
     "Content-Type": "application/json",
     "Authorization": `Bearer ${apiKey}`
 };
 
+// check valid base64. Source https://stackoverflow.com/questions/6309379/how-to-check-for-a-valid-base64-encoded-string
+function isValidBase64(str) {
+    const regex = /^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/;
+    return regex.test(str);
+}
+
+// this function recieves a base64 image and returns a description of the image
 async function image_recognition_file(base64Image, max_tokens = 300) {
+    if(!base64Image) return console.error("no base64 image provided")
+
+     // Check if the string is a valid Base64 format
+     if (!isValidBase64(base64Image)) {
+        console.error("Invalid Base64 format");
+        return;
+    }
+
 
     const payload = {
         "model": "gpt-4-vision-preview",
@@ -56,7 +53,7 @@ async function image_recognition_file(base64Image, max_tokens = 300) {
         .then(response => {
             const choices = response.data.choices;
             if (choices && choices.length > 0) {
-                // Accessing the first choice's message content
+
                 const messageContent = choices[0].message.content;
 
                 console.log("messageContent", messageContent)

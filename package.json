@@ -1,10 +1,10 @@
 {
-  "name": "edlight_image_api",
+  "name": "Kai Kleinbard edlight_image_api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --detectOpenHandles --forceExit tests",
+    "test": "jest --forceExit tests",
     "start": "nodemon index.js"
   },
   "keywords": [],

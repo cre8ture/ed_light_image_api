@@ -6,169 +6,204 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
-<body class="bg-gray-100 flex items-center justify-center h-screen">
-    <div class="bg-white p-6 rounded shadow-md w-1/3">
-        <p class="text-center mb-4">Welcome to the EdLight Image Recognition Demo. Input an image url or upload an image
-            file and recieve an image description.</p>
+<body class="bg-gray-100 flex items-center justify-center h-screen toggle-dark-mode"></body>
+<div class="bg-white p-6 rounded shadow-md w-1/3 toggle-dark-mode">
+    <p class="text-center mb-4 toggle-dark-mode">Welcome to the EdLight Image Recognition Demo. Input an image url or
+        upload an image
+        file and recieve an image description.</p>
 
-        <!-- Image URL Form -->
-        <form id="urlForm" class="mb-4">
-            <label for="imageUrl" class="block text-gray-700">Image URL:</label>
-            <input type="text" id="imageUrl" style="border: solid black 1px" name="imageUrl"
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300">
-            <input type="submit" value="Submit"
-                class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-        </form>
+    <!-- Image URL Form -->
+    <form id="urlForm" class="mb-4">
+        <label for="imageUrl" class="block text-gray-700 toggle-dark-mode">Image URL:</label>
+        <input type="text" id="imageUrl" style="border: solid black 1px" name="imageUrl"
+            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300">
+        <input type="submit" value="Submit"
+            class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+    </form>
 
-        <!-- Image Upload Form -->
-        <form id="fileForm" class="mb-4">
-            <label for="imageFile" class="block text-gray-700">Upload Image:</label>
-            <input type="file" id="imageFile" name="imageFile"
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300">
-            <input type="submit" value="Submit"
-                class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-        </form>
+    <!-- Image Upload Form -->
+    <form id="fileForm" class="mb-4 toggle-dark-mode">
+    <label for="imageFile" class="block text-gray-700 toggle-dark-mode"></label>Upload Image:</label>
+    <input type="file" id="imageFile" name="imageFile"
+        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 toggle-dark-mode">
+    <input type="submit" value="Submit"
+        class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+    </form>
 
-        <!-- Loading Spinner -->
-        <div id="image" style="margin: auto;" class="image max-w-lg mx-auto shadow-lg rounded-lg overflow-hidden"></div>
-        <div id="loading" class="loader hidden"></div>
-        <div id="output" class="mt-4"></div>
-    </div>
+    <!-- Loading Spinner -->
+    <div id="image" style="margin: auto;" class="image max-w-lg mx-auto shadow-lg rounded-lg overflow-hidden"></div>
+    <div id="loading" class="loader hidden"></div>
+    <div id="output" class="mt-4 toggle-dark-mode"></div>
+</div>
 
-    <!-- Accessibility Button -->
-    <button id="accessibilityButton" class="fixed right-5 bottom-5 bg-white p-3 rounded-full shadow-lg text-2xl">
-        ♿
-    </button>
+<!-- Accessibility Button -->
+<button id="accessibilityButton" class="fixed right-5 bottom-5 bg-white p-3 rounded-full shadow-lg text-2xl">
+    ♿
+</button>
 
-    <!-- Accessibility Drawer -->
-    <div id="accessibilityDrawer" class="fixed right-5 bottom-20 bg-white p-4 shadow-lg hidden">
-        <button onclick="increaseFontSize()">🔍 Increase Font Size</button>
-        <button onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
-    </div>
+<!-- Accessibility Drawer -->
+<div id="accessibilityDrawer" class="fixed right-5 bottom-20 bg-white p-4 shadow-lg hidden">
+    <button onclick="increaseFontSize()">🔍 Increase Font Size</button>
+    <button onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
+</div>
 
-    <style>
-        .loader {
-            border: 16px solid #f3f3f3;
-            border-radius: 50%;
-            border-top: 16px solid #3498db;
-            width: 120px;
-            height: 120px;
-            animation: spin 2s linear infinite;
-            margin: auto;
+<style>
+    .loader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 120px;
+        height: 120px;
+        animation: spin 2s linear infinite;
+        margin: auto;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
         }
 
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
+        100% {
+            transform: rotate(360deg);
         }
+    }
 
-        .dark-mode {
-            background-color: #333;
-            color: white;
-        }
-    </style>
-
-    <script>
-        const loading = document.getElementById('loading');
-        const output = document.getElementById('output');
-        const accessibilityButton = document.getElementById('accessibilityButton');
-        const accessibilityDrawer = document.getElementById('accessibilityDrawer');
+    .dark-mode {
+        background-color: #333;
+        color: white;
+    }
 
 
-        // URL form submission
-        document.getElementById('urlForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            loading.classList.remove('hidden');
-            const imageUrl = document.getElementById('imageUrl').value;
+
+    .dark-mode form,
+    .dark-mode input {
+        background-color: #555;
+        color: white;
+        border-color: #777;
+    }
+
+    .dark-mode button {
+        background-color: darkblue;
+        color: white;
+        border-color: #777;
+    }
+</style>
+
+<script>
+
+    // unsafe in practice just for demo purposes
+    let AUTHORIZATION_TOKEN = '';
+
+    fetch('/config')
+        .then(response => response.json())
+        .then(config => {
+            AUTHORIZATION_TOKEN = config.authorization;
+        })
+        .catch(error => console.error('Error fetching config:', error));
+
+
+    const loading = document.getElementById('loading');
+    const output = document.getElementById('output');
+    const accessibilityButton = document.getElementById('accessibilityButton');
+    const accessibilityDrawer = document.getElementById('accessibilityDrawer');
+
+
+    // URL form submission
+    document.getElementById('urlForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        loading.classList.remove('hidden');
+        const imageUrl = document.getElementById('imageUrl').value;
+        output.textContent = '';
+        displayImage(imageUrl)
+        fetch('/image_url', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': AUTHORIZATION_TOKEN
+            },
+            body: JSON.stringify({ image_url: imageUrl }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                loading.classList.add('hidden');
+                output.textContent = JSON.stringify(data.response);
+            });
+    });
+
+    // File form submission
+    document.getElementById('fileForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        loading.classList.remove('hidden');
+        const imageFile = document.getElementById('imageFile').files[0];
+
+        console.log("imageFile", imageFile)
+
+        const reader = new FileReader();
+        reader.onloadend = function () {
+            const base64 = reader.result.split(',')[1];
             output.textContent = '';
-            displayImage(imageUrl)
-            fetch('/image_url', {
+
+            displayImage(reader.result); // Display the image using the Data URL
+
+            fetch('/image_file', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': AUTHORIZATION_TOKEN
                 },
-                body: JSON.stringify({ image_url: imageUrl }),
+                body: JSON.stringify({ base64: base64 }),
             })
                 .then(response => response.json())
                 .then(data => {
                     loading.classList.add('hidden');
                     output.textContent = JSON.stringify(data.response);
                 });
+        }
+        reader.readAsDataURL(imageFile);
+    });
+
+    // Accessibility functions
+    function increaseFontSize() {
+        document.body.style.fontSize = 'larger';
+    }
+
+    function toggleDarkMode() {
+        // Toggle the class on the body
+        document.body.classList.toggle('dark-mode');
+
+        const elementsToToggle = document.querySelectorAll('.toggle-dark-mode');
+        elementsToToggle.forEach(element => {
+            element.classList.toggle('dark-mode');
         });
+    }
 
-        // File form submission
-        document.getElementById('fileForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            loading.classList.remove('hidden');
-            const imageFile = document.getElementById('imageFile').files[0];
 
-            const reader = new FileReader();
-            reader.onloadend = function () {
-                const base64 = reader.result.split(',')[1];
-                output.textContent = '';
+    // Toggle accessibility drawer
+    accessibilityButton.addEventListener('click', function () {
+        accessibilityDrawer.classList.toggle('hidden');
+    });
 
-                displayImage(reader.result); // Display the image using the Data URL
+    // This function displays an image in the #image div.
+    function displayImage(imageSrc) {
+        // Select the #image div.
+        const imageDiv = document.getElementById('image');
 
-                fetch('/image_file', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ base64: base64 }),
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        loading.classList.add('hidden');
-                        output.textContent = JSON.stringify(data.response);
-                    });
-            }
-            reader.readAsDataURL(imageFile);
-        });
-
-        // Accessibility functions
-        function increaseFontSize() {
-            document.body.style.fontSize = 'larger';
+        // Clear the #image div.
+        while (imageDiv.firstChild) {
+            imageDiv.removeChild(imageDiv.firstChild);
         }
 
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-            const forms = document.querySelectorAll('form');
-            forms.forEach(form => {
-                form.classList.toggle('dark-mode');
-            });
-        }
+        // Create a new img element.
+        const img = document.createElement('img');
 
-        // Toggle accessibility drawer
-        accessibilityButton.addEventListener('click', function () {
-            accessibilityDrawer.classList.toggle('hidden');
-        });
+        // Set the src attribute of the img element.
+        img.src = imageSrc;
 
-        // This function displays an image in the #image div.
-        function displayImage(imageSrc) {
-            // Select the #image div.
-            const imageDiv = document.getElementById('image');
+        // Append the img element to the #image div.
+        imageDiv.appendChild(img);
+    }
 
-            // Clear the #image div.
-            while (imageDiv.firstChild) {
-                imageDiv.removeChild(imageDiv.firstChild);
-            }
-
-            // Create a new img element.
-            const img = document.createElement('img');
-
-            // Set the src attribute of the img element.
-            img.src = imageSrc;
-
-            // Append the img element to the #image div.
-            imageDiv.appendChild(img);
-        }
-
-    </script>
+</script>
 </body>
 
 </html>
