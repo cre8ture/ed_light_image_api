@@ -23,9 +23,10 @@ it('should return 201 Created', async () => {
   }, 10000); // 10 seconds
 
   it('should return 201 Created', async () => {
-    const res = await request(app).post('/image_file').send({ base64: 'data:image/jpeg;base64,/9j/4AAQSk...' });
+    const res = await request(app).post('/image_file').send({ base64: 'SGVsbG8sIHdvcmxkIQ==' });
     expect(res.statusCode).toEqual(201);
-  }, 10000); // 10 seconds
+}, 10000); // 10 seconds
+
 
 afterAll(done => {
     server.close(done);
