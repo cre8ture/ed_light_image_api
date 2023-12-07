@@ -70,13 +70,14 @@ https://drive.google.com/drive/folders/1TVqf1pBXPz-AW_QyEsGmCNCzpvXNJge8?usp=sha
 OPENAI_API_KEY=<your key here>
 PORT=3000
 MAX_TOKENS=300
-AUTHORIZATION=<your API AUTHORIZATION here that adds authentication to your own APIs>
-   ```
+AUTHORIZATION=<your API AUTHORIZATION here that adds authentication to your own APIs>```
 
 4. **Start the Server**
-   ```bash
-   npm start
-   ```
+    ```bash
+   npm start```
+
+5. **Visit the localhost**
+Go to `localhost:3000` on your browser. This might change depending on what your `PORT` variable is in your `.env`
 
 #### Via Docker
 1. **Build the Docker Image**
