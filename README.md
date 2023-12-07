@@ -16,7 +16,7 @@ The Edlight Image API is a Node.js application designed to utilize OpenAI's capa
 #### Via GitHub
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/your-username/edlight_image_api.git
+   git clone https://github.com/cre8ture/ed_light_image_api.git
    cd edlight_image_api
    ```
 
